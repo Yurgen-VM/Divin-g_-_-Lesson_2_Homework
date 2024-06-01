@@ -22,7 +22,9 @@ namespace Task_1_var_2
             sw.Start();
 
             // Проходимся по массиву циклами, выполняя проверку на min для каждого элемента массива.
-           
+
+            Console.WriteLine("Вторя реализация решения. Финальная. \n");
+
             for (int i = 0; i < array.GetLength(0); i++)
             {
                 int IndexRow = i;
