@@ -1,5 +1,4 @@
-﻿using System.Text;
-using System.Diagnostics;
+﻿using System.Diagnostics;
 
 namespace Task_1
 {
@@ -14,53 +13,55 @@ namespace Task_1
         {
             int[,] array =
             {
-                { 7, 3, 2 },
-                { 4, 9, 6 },
-                { 1, 8, 5 }
+                { 7, 3, 2, 96 },
+                { 4, 9, 6, -25 },
+                { 1, -8, 5, 36 }
             };
 
             var sw = new Stopwatch();
 
-            Console.WriteLine("Первая реализация решения. \n");
+            Console.WriteLine("Первая реализация решения \n");
 
-            // Преобразуем массив в строку
+            // Преобразуем двумерный массив в одномерынй
 
             sw.Start();
-            StringBuilder stringArray = new StringBuilder(); 
+            int[] arrayLong = new int[array.GetLength(0) * array.GetLength(1)];
 
+            int indexCount = 0;
             for (int i = 0; i < array.GetLength(0); i++)
             {
                 for (int j = 0; j < array.GetLength(1); j++)
                 {
-                    stringArray.Append(array[i, j]);
+                    arrayLong[indexCount] = array[i, j];
+                    indexCount++;
                 }
             }
-           
-            // Выполняем сортировку однострочного массива символов
 
-            for (int i = 0; i < stringArray.Length; i++)
+            // Выполняем сортировку одномерного массива
+
+            for (int i = 0; i < arrayLong.Length; i++)
             {
-                for (int j = 0; j < stringArray.Length; j++)
+                for (int j = i; j < arrayLong.Length; j++)
                 {
-                    if (stringArray[j] > stringArray[i])
+                    if (arrayLong[j] < arrayLong[i])
                     {
-                        char temp = stringArray[i];
-                        stringArray[i] = stringArray[j];
-                        stringArray[j] = temp;
+                        int temp = arrayLong[i];
+                        arrayLong[i] = arrayLong[j];
+                        arrayLong[j] = temp;
                     }
                 }
+
             }
-           
-            // Заполняем двумерный массив новыми данными
+
+            // Заполняем двумерный массив данными мз одномерного массива
+
 
             int count = 0;
             for (int i = 0; i < array.GetLength(0); i++)
             {
-                for(int j = 0; j < array.GetLength(1); j++)
+                for (int j = 0; j < array.GetLength(1); j++)
                 {
-                    string strDigit = stringArray[count].ToString();
-                    int Digit = int.Parse(strDigit); 
-                    array[i,j] = Digit;
+                    array[i, j] = arrayLong[count];
                     count++;
                     Console.Write($"{array[i, j]}\t");
                 }
@@ -68,7 +69,6 @@ namespace Task_1
             }
             sw.Stop();
             Console.WriteLine($"Время выполнения программы: {sw.ElapsedMilliseconds} мс.");
-
             Console.ReadLine();
         }
     }
