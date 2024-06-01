@@ -21,6 +21,8 @@ namespace Task_1
 
             var sw = new Stopwatch();
 
+            Console.WriteLine("Первая реализация решения. \n");
+
             // Преобразуем массив в строку
 
             sw.Start();
